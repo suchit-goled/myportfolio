@@ -86,7 +86,7 @@ function Hero() {
             <div className="hero-right">
 
                 <div className="profile-circle">
-                    <img src=" ./WhatsApp Image 2026-06-15 at 5.47.56 PM.jpeg" />
+                    <img src=" ./WhatsApp Image 2026-06-15 at 5.47.56 PM.jpeg" alt="image"/>
                 </div>
 
                 <div className="tech-card react">
