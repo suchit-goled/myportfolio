@@ -87,7 +87,7 @@ function Hero() {
 
                 <div className="profile-circle">
                     <img
-                        src={Suchit.jpeg}
+                        src="./Suchit.jpeg"
                         alt="Suchit Goled"
                     />
                 </div>
