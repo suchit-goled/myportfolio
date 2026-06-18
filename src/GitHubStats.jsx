@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+
 function GitHubStats() {
     return (
 
         <section
-  id="github"
-  className="github-stats"
->
+            id="github"
+            className="github-stats"
+        >
 
             <h2>GitHub Statistics</h2>
 
