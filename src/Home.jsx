@@ -5,7 +5,7 @@ import TechStack from "./TechStack";
 import Projects from "./Projects";
 import Contact from "./Contact";
 import Footer from "./Footer";
-import GitHubStats from "./GitHubStats";
+
 function Home() {
   return (
     <>
