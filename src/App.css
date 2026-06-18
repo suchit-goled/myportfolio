@@ -2044,3 +2044,153 @@ ul {
     top:40px;
     right:-120px;
 }
+
+
+
+
+.github-stats {
+    padding: 120px 8%;
+    position: relative;
+    overflow: hidden;
+}
+
+.github-stats::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: #FFF176;
+    filter: blur(250px);
+    opacity: 0.08;
+    top: -100px;
+    left: -100px;
+    z-index: 0;
+}
+
+.github-stats::after {
+    content: "";
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background: #98FFEC;
+    filter: blur(250px);
+    opacity: 0.08;
+    bottom: -100px;
+    right: -100px;
+    z-index: 0;
+}
+
+.github-stats h2 {
+    text-align: center;
+    font-size: 3.5rem;
+    margin-bottom: 60px;
+    font-weight: 800;
+
+    background: linear-gradient(
+        90deg,
+        #FFF176,
+        #98FFEC
+    );
+
+    -webkit-background-clip: text;
+    color: transparent;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(500px,1fr));
+    gap: 35px;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+
+.stats-grid img {
+    width: 100%;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,0.05);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    padding: 18px;
+
+    transition: all .4s ease;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.25);
+}
+
+.stats-grid img:hover {
+    transform: translateY(-12px) scale(1.02);
+
+    border-color: rgba(152,255,236,0.5);
+
+    box-shadow:
+        0 0 25px rgba(152,255,236,.25),
+        0 0 50px rgba(255,241,118,.15);
+}
+
+
+.stats-grid img:nth-child(odd) {
+    animation: float1 6s ease-in-out infinite;
+}
+
+.stats-grid img:nth-child(even) {
+    animation: float2 7s ease-in-out infinite;
+}
+
+@keyframes float1 {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes float2 {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+
+@media(max-width:768px){
+
+    .github-stats{
+        padding:80px 6%;
+    }
+
+    .github-stats h2{
+        font-size:2.5rem;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+}

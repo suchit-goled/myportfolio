@@ -8,6 +8,7 @@ import Home from "./Home";
 import Certificates from "./Certificates";
 import "./App.css";
 import BandageProject from "./BandageProject";
+import GitHubStats from "./GitHubStats";
 
 import { useEffect } from "react";
 
@@ -32,12 +33,15 @@ function App() {
   return (
 
     <><div id="cursor-dot"></div><BrowserRouter>
+    
 
       <Routes>
 
         <Route
           path="/"
           element={<Home />} />
+
+          
 
         <Route
           path="/certificates"
@@ -47,7 +51,15 @@ function App() {
           path="/project/ai-smart-bandage"
           element={<BandageProject />} />
 
+           <Route
+      path="/github"
+      element={<GitHubStats/>}/>
+
       </Routes>
+
+     
+
+      
 
     </BrowserRouter></>
   );

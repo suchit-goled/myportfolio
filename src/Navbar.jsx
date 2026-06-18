@@ -41,6 +41,12 @@ function Navbar() {
             Certificates
           </Link>
         </li>
+        <li>
+          <Link to="/github"
+          onClick={()=>setMenuOpen(false)}>
+            GitHub-Activity
+          </Link>
+          </li>
 
         <li>
           <a href="#contact">Contact</a>
