@@ -19,6 +19,29 @@ function Hero() {
     return (
         <section id="home" className="hero">
 
+            <div className="particles">
+
+                <span className="particle"></span>
+                <span className="particle"></span>
+                <span className="particle"></span>
+                <span className="particle"></span>
+                <span className="particle"></span>
+                
+                <span className="particle"></span>
+                <span className="particle"></span>
+                <span className="particle"></span>
+                <span className="particle"></span>
+                <span className="particle"></span>
+
+                
+                <span className="particle"></span>
+                <span className="particle"></span>
+                <span className="particle"></span>
+                <span className="particle"></span>
+                <span className="particle"></span>
+
+            </div>
+
             <div className="hero-left">
 
                 <motion.div

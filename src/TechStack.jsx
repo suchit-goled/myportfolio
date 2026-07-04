@@ -61,6 +61,8 @@ function TechStack() {
   return (
     <section className="tech-stack" id="skills">
 
+      
+
       <h2>Tech Stack</h2>
 
       {techGroups.map((group, index) => (
