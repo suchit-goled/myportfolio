@@ -181,6 +181,47 @@ function Projects() {
 
                 </div>
 
+                 {/* AI Pharma CRM */}
+
+                <div className="project-card">
+
+                    <div className="project-image">
+                        🤖
+                    </div>
+                    <div className="project-content">
+
+                        <h3>AI Pharma CRM</h3>
+
+                        <p>
+                           
+                        </p>
+
+                        <div className="tech">
+                            <span>LangGraph</span>
+                            <span>React</span>
+                            <span>AI</span>
+                        </div>
+                        <div className="project-actions">
+                            <button
+                                className="github-btn"
+                                onClick={() =>
+                                    window.open(
+                                        "https://github.com/suchit-goled/Pharmaceutical-CRM",
+                                        "_blank"
+                                    )
+                                }
+                            >
+                                GitHub
+                            </button>
+
+                            <button className="details-btn">
+                                Details
+                            </button>
+                        </div>
+
+                        </div>
+                        </div>
+
 
 
             </section>
