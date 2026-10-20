@@ -1,149 +1,177 @@
-
-
-import { motion } from "framer-motion";
-
 import { TypeAnimation } from "react-type-animation";
-
-import {
-    FaReact,
-    FaNodeJs,
-    FaGithub,
-} from "react-icons/fa";
-
-import {
-    SiMongodb,
-    SiArduino,
-} from "react-icons/si";
+import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaArrowRight, FaMicrochip, FaReact, FaBrain } from "react-icons/fa";
+import { portfolioData } from "./data/portfolioData";
 
 function Hero() {
-    return (
-        <section id="home" className="hero">
+  const { personal } = portfolioData;
 
-            <div className="particles">
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
-                <span className="particle"></span>
-                <span className="particle"></span>
-                <span className="particle"></span>
-                <span className="particle"></span>
-                <span className="particle"></span>
-                
-                <span className="particle"></span>
-                <span className="particle"></span>
-                <span className="particle"></span>
-                <span className="particle"></span>
-                <span className="particle"></span>
-
-                
-                <span className="particle"></span>
-                <span className="particle"></span>
-                <span className="particle"></span>
-                <span className="particle"></span>
-                <span className="particle"></span>
-
+  return (
+    <section id="home" className="hero-section" aria-label="Introduction">
+      <div className="section-container" style={{ width: "100%", paddingTop: "20px", paddingBottom: "20px" }}>
+        <div className="hero-grid">
+          {/* Left Column: Narrative & Actions */}
+          <div className="hero-content">
+            <div className="hero-badge-pill">
+              <span className="beacon-dot" aria-hidden="true"></span>
+              <span>{personal.availability}</span>
             </div>
 
-            <div className="hero-left">
+            <p className="hero-intro">
+              Hello, I'm
+            </p>
 
-                <motion.div
-                    className="status"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                >
-                    🟢 Available for Opportunities
-                </motion.div>
+            <h1 className="hero-title">
+              <span className="gradient-name">{personal.name}</span>
+            </h1>
 
-                <motion.h3
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                >
-                    HELLO I'M
-                </motion.h3>
-
-                <motion.h1
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                >
-                    SUCHIT GOLED
-                </motion.h1>
-
-                <div className="animated-role">
-                    <TypeAnimation
-                        sequence={[
-                            "Full Stack Developer",
-                            2000,
-                            "IoT Innovator",
-                            2000,
-                            "AI Enthusiast",
-                            2000,
-                            "Problem Solver",
-                            2000,
-                        ]}
-                        speed={50}
-                        repeat={Infinity}
-                    />
-                </div>
-
-                <p>
-                    Passionate about building intelligent solutions
-                    using Artificial Intelligence, IoT, Cloud
-                    Technologies and Full Stack Development.
-                </p>
-
-                <div className="hero-buttons">
-                    <a
-                        href="./Suchit_Resume1 (1).pdf"
-                        download
-                    >
-                        <button className="primary-btn">
-                            Download Resume
-                        </button>
-                    </a>
-
-                    <button className="secondary-btn">
-                        Contact Me
-                    </button>
-                </div>
-
+            <div className="hero-dynamic-role" aria-label="Specialization">
+              <span>Focusing on</span>
+              <TypeAnimation
+                sequence={[
+                  "Full Stack Development",
+                  2200,
+                  "IoT & Embedded Systems",
+                  2200,
+                  "Real-Time Biosensors",
+                  2200,
+                  "AI & LangGraph Systems",
+                  2200,
+                  "Hardware-Software Integration",
+                  2200
+                ]}
+                speed={50}
+                repeat={Infinity}
+                className="role-highlight"
+              />
             </div>
 
-            <div className="hero-right">
+            <p className="hero-description">
+              Electronics and Communication Engineering student at <strong>Acharya Institute of Technology</strong>.
+              I architect full-stack web applications with <strong>React, Node.js & MongoDB</strong> and engineer real-time
+              hardware solutions with <strong>ESP32, biosensors & AI telemetry</strong>.
+            </p>
 
-                <div className="profile-circle">
-                    <img
-                        src="./Suchit.jpeg"
-                        alt="Suchit Goled"
-                    />
-                </div>
+            {/* CTAs */}
+            <div className="hero-cta-group">
+              <button
+                className="btn-primary"
+                onClick={() => scrollToSection("projects")}
+              >
+                <span>View Projects</span>
+                <FaArrowRight aria-hidden="true" />
+              </button>
 
-                <div className="tech-card react">
-                    <FaReact />
-                    <span>React</span>
-                </div>
+              <a
+                href={process.env.PUBLIC_URL + personal.resume}
+                download="Suchit_Goled_Resume.pdf"
+                className="btn-secondary"
+              >
+                <FaDownload aria-hidden="true" />
+                <span>Resume</span>
+              </a>
 
-                <div className="tech-card node">
-                    <FaNodeJs />
-                    <span>Node.js</span>
-                </div>
-
-                <div className="tech-card mongo">
-                    <SiMongodb />
-                    <span>MongoDB</span>
-                </div>
-
-                <div className="tech-card arduino">
-                    <SiArduino />
-                    <span>Arduino</span>
-                </div>
-
-                <div className="tech-card github">
-                    <FaGithub />
-                    <span>GitHub</span>
-                </div>
-
+              <button
+                className="btn-secondary"
+                onClick={() => scrollToSection("contact")}
+              >
+                <span>Contact Me</span>
+              </button>
             </div>
 
-        </section>
-    );
+            {/* Social Channels */}
+            <div className="hero-social-row">
+              <span className="hero-social-label">Connect:</span>
+              <a
+                href={personal.github}
+                target="_blank"
+                rel="noreferrer"
+                className="social-icon-btn"
+                aria-label="GitHub Profile"
+              >
+                <FaGithub />
+              </a>
+              <a
+                href={personal.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="social-icon-btn"
+                aria-label="LinkedIn Profile"
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href={`mailto:${personal.email}`}
+                className="social-icon-btn"
+                aria-label="Send Email"
+              >
+                <FaEnvelope />
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Engineering Visual Showcase */}
+          <div className="hero-visual">
+            <div className="hero-avatar-frame">
+              <img
+                src={process.env.PUBLIC_URL + personal.avatar}
+                alt={personal.name}
+                loading="eager"
+              />
+              <div className="avatar-overlay-gradient"></div>
+              <div className="avatar-caption">
+                <div>
+                  <div className="avatar-caption-title">Suchit Goled</div>
+                  <div className="avatar-caption-sub">ECE • Full Stack • IoT</div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: "0.78rem", color: "#94a3b8" }}>Based in</div>
+                  <div style={{ fontSize: "0.85rem", fontWeight: "600", color: "#f8fafc" }}>Bangalore, IN</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating Context Chips */}
+            <div className="floating-chip chip-top-left" aria-hidden="true">
+              <div className="chip-icon">
+                <FaReact />
+              </div>
+              <div className="chip-info">
+                <strong>Full Stack</strong>
+                <span>MERN Architecture</span>
+              </div>
+            </div>
+
+            <div className="floating-chip chip-bottom-right" aria-hidden="true">
+              <div className="chip-icon">
+                <FaMicrochip />
+              </div>
+              <div className="chip-info">
+                <strong>Embedded IoT</strong>
+                <span>ESP32 & Sensors</span>
+              </div>
+            </div>
+
+            <div className="floating-chip chip-mid-left" aria-hidden="true">
+              <div className="chip-icon">
+                <FaBrain />
+              </div>
+              <div className="chip-info">
+                <strong>Applied AI</strong>
+                <span>LangGraph & Vision</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default Hero;
