@@ -7,7 +7,6 @@ import {
   FaBookOpen,
   FaCertificate,
   FaExternalLinkAlt,
-  FaCalendarAlt,
   FaMapMarkerAlt
 } from "react-icons/fa";
 import { portfolioData } from "./data/portfolioData";

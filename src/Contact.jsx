@@ -6,8 +6,7 @@ import {
   FaPaperPlane,
   FaCopy,
   FaCheck,
-  FaMapMarkerAlt,
-  FaPhoneAlt
+  FaMapMarkerAlt
 } from "react-icons/fa";
 import { portfolioData } from "./data/portfolioData";
 

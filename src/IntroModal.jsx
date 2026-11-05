@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaPlay, FaPause, FaTimes, FaVolumeUp, FaVolumeMute, FaExternalLinkAlt, FaAward } from "react-icons/fa";
+import { FaPlay, FaPause, FaTimes, FaVolumeUp, FaVolumeMute, FaExternalLinkAlt } from "react-icons/fa";
 import { portfolioData } from "./data/portfolioData";
 
 export default function IntroModal({ isOpen, onClose }) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaPlay, FaGithub, FaExternalLinkAlt, FaInfoCircle, FaShieldAlt } from "react-icons/fa";
+import { FaPlay, FaGithub, FaInfoCircle } from "react-icons/fa";
 import { portfolioData } from "./data/portfolioData";
 
 export default function Projects() {

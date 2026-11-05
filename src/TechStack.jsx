@@ -9,25 +9,24 @@ import {
   FaLightbulb,
   FaMicrochip,
   FaVial,
-  FaSmog,
-  FaDatabase
+  FaSmog
 } from "react-icons/fa";
 import {
   SiJavascript,
   SiHtml5,
-  SiCss3,
+  SiCss,
   SiTailwindcss,
   SiExpress,
   SiMongodb,
   SiMysql,
   SiArduino,
-  SiVisualstudiocode,
   SiTensorflow,
   SiFlask,
   SiFastapi,
   SiOpencv,
   SiFramer
 } from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
 import { portfolioData } from "./data/portfolioData";
 
 export default function TechStack() {
@@ -41,8 +40,9 @@ export default function TechStack() {
         return <SiJavascript className="skill-icon color-js" />;
       case "SiHtml5":
         return <SiHtml5 className="skill-icon color-html" />;
+      case "SiCss":
       case "SiCss3":
-        return <SiCss3 className="skill-icon color-css" />;
+        return <SiCss className="skill-icon color-css" />;
       case "SiTailwindcss":
         return <SiTailwindcss className="skill-icon color-tailwind" />;
       case "SiFramer":
@@ -82,9 +82,10 @@ export default function TechStack() {
         return <FaGitAlt className="skill-icon color-git" />;
       case "FaGithub":
         return <FaGithub className="skill-icon color-github" />;
+      case "VscVscode":
       case "SiVisualstudiocode":
       default:
-        return <SiVisualstudiocode className="skill-icon color-vscode" />;
+        return <VscVscode className="skill-icon color-vscode" />;
     }
   };
 

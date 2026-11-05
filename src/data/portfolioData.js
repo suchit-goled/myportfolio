@@ -544,7 +544,7 @@ export const portfolioData = {
           { name: "Git", level: "Advanced", icon: "FaGitAlt", desc: "Distributed version control & branches" },
           { name: "GitHub", level: "Advanced", icon: "FaGithub", desc: "Repositories, collaboration & releases" },
           { name: "Arduino IDE", level: "Advanced", icon: "SiArduino", desc: "Firmware flashing & serial monitor" },
-          { name: "VS Code", level: "Expert", icon: "SiVisualstudiocode", desc: "Development workflow & debugging" }
+          { name: "VS Code", level: "Expert", icon: "VscVscode", desc: "Development workflow & debugging" }
         ]
       }
     ]
