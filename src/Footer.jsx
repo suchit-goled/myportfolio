@@ -1,9 +1,10 @@
+import React from "react";
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp, FaDownload } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { portfolioData } from "./data/portfolioData";
 
-function Footer() {
-  const { personal } = portfolioData;
+export default function Footer() {
+  const { personal, branding } = portfolioData;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -19,117 +20,144 @@ function Footer() {
   };
 
   return (
-    <footer className="footer-wrap" role="contentinfo" aria-label="Site Footer">
-      <div className="footer-inner">
-        {/* Brand Summary */}
-        <div className="footer-brand">
-          <h4>{personal.name}</h4>
-          <p>
-            Electronics and Communication Engineering student at Acharya Institute of Technology, Bangalore.
-            Engineering full-stack web platforms, IoT biosensors, and AI workflows.
-          </p>
-          <div style={{ display: "flex", gap: "12px", marginTop: "18px" }}>
-            <a
-              href={personal.github}
-              target="_blank"
-              rel="noreferrer"
-              className="social-icon-btn"
-              aria-label="GitHub Profile"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href={personal.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="social-icon-btn"
-              aria-label="LinkedIn Profile"
-            >
-              <FaLinkedin />
-            </a>
-            <a
-              href={`mailto:${personal.email}`}
-              className="social-icon-btn"
-              aria-label="Email Suchit"
-            >
-              <FaEnvelope />
-            </a>
+    <footer className="netflix-footer" role="contentinfo" aria-label="Site Footer">
+      <div className="section-container">
+        <div className="footer-top-row">
+          {/* Brand Info */}
+          <div className="footer-brand-box">
+            <div className="footer-logo">
+              <span className="brand-netflix-lead">{branding.leadWord}</span>
+              <span className="brand-netflix-accent">{branding.accentWord}</span>
+            </div>
+            <p className="footer-tagline-text">{branding.tagline}</p>
+            <p className="footer-bio-summary">
+              Electronics & Communication Engineering · Full Stack Developer · IoT & Bio-Sensing Innovator.
+              Acharya Institute of Technology, Bangalore.
+            </p>
+
+            <div className="footer-social-links">
+              <a
+                href={personal.github}
+                target="_blank"
+                rel="noreferrer"
+                className="footer-social-btn"
+                aria-label="GitHub Profile"
+              >
+                <FaGithub />
+              </a>
+              <a
+                href={personal.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="footer-social-btn"
+                aria-label="LinkedIn Profile"
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href={`mailto:${personal.email}`}
+                className="footer-social-btn"
+                aria-label="Email Suchit"
+              >
+                <FaEnvelope />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Links Column */}
+          <div className="footer-nav-col">
+            <h4 className="footer-col-title">ORIGINALS CATALOGUE</h4>
+            <ul className="footer-links-list">
+              <li>
+                <button type="button" onClick={() => handleNavClick("home")}>
+                  Home
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => handleNavClick("projects")}>
+                  Projects Showcase
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => handleNavClick("journey")}>
+                  My Journey
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => handleNavClick("skills")}>
+                  Technical Skills
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => handleNavClick("top-moments")}>
+                  Top Moments
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => handleNavClick("full-story")}>
+                  The Full Story
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => handleNavClick("contact")}>
+                  Contact Me
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Productions & Case Studies */}
+          <div className="footer-nav-col">
+            <h4 className="footer-col-title">FEATURED PRODUCTIONS</h4>
+            <ul className="footer-links-list">
+              <li>
+                <Link to="/project/ai-smart-bandage">S01 E01 · AI Smart Bandage</Link>
+              </li>
+              <li>
+                <Link to="/project/smart-inhaler">S01 E02 · Smart Inhaler System</Link>
+              </li>
+              <li>
+                <Link to="/project/pharma-crm">S01 E03 · Pharmaceutical CRM</Link>
+              </li>
+              <li>
+                <Link to="/project/product-catalog">S01 E04 · Product Catalog AI</Link>
+              </li>
+              <li>
+                <Link to="/project/electronova">S01 E05 · ElectroMart MERN</Link>
+              </li>
+              <li>
+                <Link to="/certificates">Verified Certifications</Link>
+              </li>
+              <li>
+                <a
+                  href={process.env.PUBLIC_URL + personal.resume}
+                  download="Suchit_Goled_Resume.pdf"
+                  className="footer-resume-link"
+                >
+                  <FaDownload className="mini-icon" /> Download Resume
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Quick Section Navigation */}
-        <div className="footer-nav-col">
-          <h5>Navigation</h5>
-          <ul>
-            <li>
-              <button onClick={() => handleNavClick("home")}>Home</button>
-            </li>
-            <li>
-              <button onClick={() => handleNavClick("about")}>About Me</button>
-            </li>
-            <li>
-              <button onClick={() => handleNavClick("experience")}>Experience & Education</button>
-            </li>
-            <li>
-              <button onClick={() => handleNavClick("projects")}>Featured Projects</button>
-            </li>
-            <li>
-              <button onClick={() => handleNavClick("skills")}>Technical Skills</button>
-            </li>
-            <li>
-              <button onClick={() => handleNavClick("contact")}>Contact</button>
-            </li>
-          </ul>
-        </div>
+        {/* Bottom Bar */}
+        <div className="footer-bottom-bar">
+          <p className="footer-copyright">
+            © {new Date().getFullYear()} Suchit Goled · SUCHIT ORIGINALS. All rights reserved.
+          </p>
 
-        {/* Deep Pages & Resources */}
-        <div className="footer-nav-col">
-          <h5>Credentials & Links</h5>
-          <ul>
-            <li>
-              <Link to="/certificates">Certificates & Hackathons</Link>
-            </li>
-            <li>
-              <Link to="/github">GitHub Activity</Link>
-            </li>
-            <li>
-              <Link to="/project/ai-smart-bandage">AI Smart Bandage</Link>
-            </li>
-            <li>
-              <Link to="/project/electronova">Electronova MERN Platform</Link>
-            </li>
-            <li>
-              <Link to="/project/product-catalog">AI Catalog Generator</Link>
-            </li>
-            <li>
-              <a
-                href={process.env.PUBLIC_URL + personal.resume}
-                download="Suchit_Goled_Resume.pdf"
-                style={{ color: "var(--teal-light)", fontWeight: "600", display: "inline-flex", alignItems: "center", gap: "6px" }}
-              >
-                <FaDownload style={{ fontSize: "0.8rem" }} /> Download Resume
-              </a>
-            </li>
-          </ul>
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="footer-back-to-top"
+            aria-label="Back to top"
+          >
+            <span>Top</span>
+            <FaArrowUp />
+          </button>
         </div>
-      </div>
-
-      {/* Bottom Legal / Copyright Bar */}
-      <div className="footer-bottom-bar">
-        <div>
-          © {new Date().getFullYear()} Suchit Goled. Built with React & modern web engineering standards.
-        </div>
-        <button
-          onClick={scrollToTop}
-          className="back-to-top-btn"
-          aria-label="Scroll back to top of page"
-        >
-          <span>Back to Top</span>
-          <FaArrowUp aria-hidden="true" />
-        </button>
       </div>
     </footer>
   );
 }
-
-export default Footer;

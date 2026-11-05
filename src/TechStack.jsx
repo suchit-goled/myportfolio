@@ -1,164 +1,165 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
 import {
   FaReact,
   FaNodeJs,
   FaPython,
   FaGitAlt,
   FaGithub,
-  FaMicrochip,
   FaBrain,
-  FaServer,
-  FaCode,
-  FaCss3Alt,
-  FaHtml5,
-  FaBluetooth,
+  FaLightbulb,
+  FaMicrochip,
+  FaVial,
   FaSmog,
-  FaVial
+  FaDatabase
 } from "react-icons/fa";
 import {
   SiJavascript,
-  SiMongodb,
+  SiHtml5,
+  SiCss3,
+  SiTailwindcss,
   SiExpress,
-  SiArduino,
-  SiC,
-  SiCplusplus,
+  SiMongodb,
   SiMysql,
+  SiArduino,
+  SiVisualstudiocode,
+  SiTensorflow,
+  SiFlask,
+  SiFastapi,
   SiOpencv,
   SiFramer
 } from "react-icons/si";
+import { portfolioData } from "./data/portfolioData";
 
-function TechStack() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+export default function TechStack() {
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  const skillCategories = [
-    {
-      id: "languages",
-      title: "Languages",
-      skills: [
-        { name: "JavaScript (ES6+)", category: "Languages", level: "Primary Language", icon: <SiJavascript /> },
-        { name: "Python", category: "Languages", level: "AI & Scripting", icon: <FaPython /> },
-        { name: "C", category: "Languages", level: "Firmware / Embedded", icon: <SiC /> },
-        { name: "C++", category: "Languages", level: "Microcontrollers / OOP", icon: <SiCplusplus /> },
-        { name: "SQL", category: "Languages", level: "Relational Queries", icon: <SiMysql /> }
-      ]
-    },
-    {
-      id: "frontend",
-      title: "Frontend",
-      skills: [
-        { name: "React.js", category: "Frontend", level: "Component Architecture", icon: <FaReact /> },
-        { name: "HTML5", category: "Frontend", level: "Semantic Markup", icon: <FaHtml5 /> },
-        { name: "CSS3 / Modern CSS", category: "Frontend", level: "Responsive Flex/Grid", icon: <FaCss3Alt /> },
-        { name: "Framer Motion", category: "Frontend", level: "Interaction Design", icon: <SiFramer /> }
-      ]
-    },
-    {
-      id: "backend",
-      title: "Backend & Data",
-      skills: [
-        { name: "Node.js", category: "Backend & Data", level: "Runtime Environment", icon: <FaNodeJs /> },
-        { name: "Express.js", category: "Backend & Data", level: "REST Microservices", icon: <SiExpress /> },
-        { name: "MongoDB", category: "Backend & Data", level: "Document Storage", icon: <SiMongodb /> },
-        { name: "MySQL", category: "Backend & Data", level: "Relational DB", icon: <SiMysql /> },
-        { name: "RESTful APIs", category: "Backend & Data", level: "System Integration", icon: <FaServer /> }
-      ]
-    },
-    {
-      id: "iot",
-      title: "Embedded & IoT",
-      skills: [
-        { name: "ESP32", category: "Embedded & IoT", level: "Wi-Fi & BLE Telemetry", icon: <FaMicrochip /> },
-        { name: "Arduino Uno", category: "Embedded & IoT", level: "Hardware Interfacing", icon: <SiArduino /> },
-        { name: "BLE Connectivity", category: "Embedded & IoT", level: "Low Energy Protocol", icon: <FaBluetooth /> },
-        { name: "MQ135 Gas Sensor", category: "Embedded & IoT", level: "Air Quality Analysis", icon: <FaSmog /> },
-        { name: "Electrochemical Biosensors", category: "Embedded & IoT", level: "Wound Monitoring", icon: <FaVial /> }
-      ]
-    },
-    {
-      id: "ai",
-      title: "AI & Tools",
-      skills: [
-        { name: "LangGraph", category: "AI & Tools", level: "Agentic Workflows", icon: <FaBrain /> },
-        { name: "OpenCV", category: "AI & Tools", level: "Computer Vision", icon: <SiOpencv /> },
-        { name: "Git", category: "AI & Tools", level: "Version Control", icon: <FaGitAlt /> },
-        { name: "GitHub", category: "AI & Tools", level: "CI/CD & Collaboration", icon: <FaGithub /> },
-        { name: "Arduino IDE", category: "AI & Tools", level: "Embedded Toolchain", icon: <SiArduino /> }
-      ]
+  const getTechIcon = (iconName) => {
+    switch (iconName) {
+      case "FaReact":
+        return <FaReact className="skill-icon color-react" />;
+      case "SiJavascript":
+        return <SiJavascript className="skill-icon color-js" />;
+      case "SiHtml5":
+        return <SiHtml5 className="skill-icon color-html" />;
+      case "SiCss3":
+        return <SiCss3 className="skill-icon color-css" />;
+      case "SiTailwindcss":
+        return <SiTailwindcss className="skill-icon color-tailwind" />;
+      case "SiFramer":
+        return <SiFramer className="skill-icon color-framer" />;
+      case "FaNodeJs":
+        return <FaNodeJs className="skill-icon color-node" />;
+      case "SiExpress":
+        return <SiExpress className="skill-icon color-express" />;
+      case "SiFlask":
+        return <SiFlask className="skill-icon color-flask" />;
+      case "SiFastapi":
+        return <SiFastapi className="skill-icon color-fastapi" />;
+      case "SiMongodb":
+        return <SiMongodb className="skill-icon color-mongo" />;
+      case "SiMysql":
+      case "FaDatabase":
+        return <SiMysql className="skill-icon color-sql" />;
+      case "FaPython":
+        return <FaPython className="skill-icon color-python" />;
+      case "SiTensorflow":
+        return <SiTensorflow className="skill-icon color-tf" />;
+      case "FaBrain":
+        return <FaBrain className="skill-icon color-ai" />;
+      case "SiOpencv":
+        return <SiOpencv className="skill-icon color-cv" />;
+      case "FaLightbulb":
+        return <FaLightbulb className="skill-icon color-prompt" />;
+      case "FaMicrochip":
+        return <FaMicrochip className="skill-icon color-chip" />;
+      case "SiArduino":
+        return <SiArduino className="skill-icon color-arduino" />;
+      case "FaVial":
+        return <FaVial className="skill-icon color-sensor" />;
+      case "FaSmog":
+        return <FaSmog className="skill-icon color-sensor" />;
+      case "FaGitAlt":
+        return <FaGitAlt className="skill-icon color-git" />;
+      case "FaGithub":
+        return <FaGithub className="skill-icon color-github" />;
+      case "SiVisualstudiocode":
+      default:
+        return <SiVisualstudiocode className="skill-icon color-vscode" />;
     }
-  ];
+  };
 
-  // Flattened skills for "all" filter
-  const allSkills = skillCategories.flatMap((cat) => cat.skills);
-  const activeSkills =
-    selectedCategory === "all"
-      ? allSkills
-      : skillCategories.find((cat) => cat.id === selectedCategory)?.skills || [];
+  const categories = portfolioData.skills.categories;
+  const filteredCategories =
+    activeCategory === "all"
+      ? categories
+      : categories.filter((c) => c.id === activeCategory);
 
   return (
-    <section id="skills" className="section-container" aria-label="Technical Skills and Stack">
-      <div className="section-header">
-        <div className="section-tag">
-          <FaCode /> Technical Competence
+    <section id="skills" className="tech-stack-netflix-section" aria-labelledby="skills-heading">
+      <div className="section-container">
+        <div className="skills-header-row">
+          <div>
+            <h2 id="skills-heading" className="section-shelf-heading">
+              MY SKILLS
+            </h2>
+            <p className="skills-shelf-subtitle">
+              PRODUCTION STACKS & EMBEDDED SYSTEM DOMAINS
+            </p>
+          </div>
+
+          {/* Filter Pills */}
+          <div className="skills-filter-pills" role="tablist">
+            <button
+              type="button"
+              className={`filter-pill-btn ${activeCategory === "all" ? "active" : ""}`}
+              onClick={() => setActiveCategory("all")}
+              role="tab"
+              aria-selected={activeCategory === "all"}
+            >
+              All Domains
+            </button>
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                className={`filter-pill-btn ${activeCategory === cat.id ? "active" : ""}`}
+                onClick={() => setActiveCategory(cat.id)}
+                role="tab"
+                aria-selected={activeCategory === cat.id}
+              >
+                {cat.title.replace(" Development", "").replace(" & Storage", "").replace(" & Machine Learning", "")}
+              </button>
+            ))}
+          </div>
         </div>
-        <h2 className="section-title">
-          Skills & <span>Technologies</span>
-        </h2>
-        <p className="section-subtitle">
-          Hands-on proficiency across programming languages, web systems, database design, hardware microcontrollers, and machine learning tools.
-        </p>
-      </div>
 
-      {/* Category Filter Tabs */}
-      <div className="skills-nav-tabs" role="tablist" aria-label="Skill Categories">
-        <button
-          className={`skills-tab-pill ${selectedCategory === "all" ? "active" : ""}`}
-          onClick={() => setSelectedCategory("all")}
-          role="tab"
-          aria-selected={selectedCategory === "all"}
-        >
-          All Skills ({allSkills.length})
-        </button>
-        {skillCategories.map((cat) => (
-          <button
-            key={cat.id}
-            className={`skills-tab-pill ${selectedCategory === cat.id ? "active" : ""}`}
-            onClick={() => setSelectedCategory(cat.id)}
-            role="tab"
-            aria-selected={selectedCategory === cat.id}
-          >
-            {cat.title} ({cat.skills.length})
-          </button>
-        ))}
-      </div>
+        {/* Categories Shelves */}
+        <div className="skills-shelves-container">
+          {filteredCategories.map((category) => (
+            <div key={category.id} className="skill-category-shelf">
+              <div className="category-shelf-header">
+                <h3 className="category-shelf-title">{category.title}</h3>
+                <span className="category-shelf-count">{category.items.length} Technologies</span>
+              </div>
 
-      {/* Skills Grid */}
-      <motion.div
-        className="skills-grid"
-        layout
-        transition={{ duration: 0.3 }}
-      >
-        {activeSkills.map((skill, idx) => (
-          <motion.div
-            key={`${skill.name}-${idx}`}
-            className="skill-node-card"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: idx * 0.03 }}
-            layout
-          >
-            <div className="skill-icon-wrap" aria-hidden="true">
-              {skill.icon}
+              <div className="skill-cards-grid">
+                {category.items.map((skill, sIdx) => (
+                  <div key={sIdx} className="skill-item-card">
+                    <div className="skill-icon-box">{getTechIcon(skill.icon)}</div>
+                    <div className="skill-info-box">
+                      <div className="skill-name-row">
+                        <span className="skill-name">{skill.name}</span>
+                        <span className="skill-level-badge">{skill.level}</span>
+                      </div>
+                      <p className="skill-desc-text">{skill.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="skill-info">
-              <span className="skill-name">{skill.name}</span>
-              <span className="skill-proficiency">{skill.level}</span>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
-
-export default TechStack;

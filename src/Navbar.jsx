@@ -1,32 +1,37 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaBars, FaTimes, FaDownload, FaBriefcase, FaCode, FaAward } from "react-icons/fa";
+import { FaSearch, FaBell, FaBars, FaTimes, FaUserTie, FaCode, FaFlask, FaUsers, FaDownload } from "react-icons/fa";
 import { portfolioData } from "./data/portfolioData";
+import SearchModal from "./SearchModal";
+import NotificationDropdown from "./NotificationDropdown";
 
-function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function Navbar({ currentProfile, onOpenProfileModal }) {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [notifOpen, setNotifOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 40);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "Escape" && menuOpen) {
+      if (e.key === "Escape") {
         setMenuOpen(false);
+        setSearchOpen(false);
+        setNotifOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [menuOpen]);
+  }, []);
 
   const handleNavClick = (sectionId) => {
     setMenuOpen(false);
@@ -35,154 +40,255 @@ function Navbar() {
       setTimeout(() => {
         const el = document.getElementById(sectionId);
         if (el) el.scrollIntoView({ behavior: "smooth" });
-      }, 100);
+      }, 150);
     } else {
       const el = document.getElementById(sectionId);
       if (el) el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
+  const getProfileIcon = () => {
+    if (!currentProfile) return <FaUserTie />;
+    switch (currentProfile.icon) {
+      case "code":
+        return <FaCode />;
+      case "flask":
+        return <FaFlask />;
+      case "users":
+        return <FaUsers />;
+      default:
+        return <FaUserTie />;
+    }
+  };
+
   return (
-    <nav className={`navbar ${scrolled ? "scrolled" : ""}`} role="navigation" aria-label="Main Navigation">
-      <Link to="/" className="nav-brand" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-        <div className="brand-badge" aria-hidden="true">SG</div>
-        <div className="brand-text">
-          Suchit<span>.dev</span>
-        </div>
-      </Link>
-
-      {/* Desktop Navigation Links */}
-      <div className="nav-links-desktop">
-        <button className="nav-item" onClick={() => handleNavClick("home")}>
-          Home
-        </button>
-        <button className="nav-item" onClick={() => handleNavClick("about")}>
-          About
-        </button>
-        <button className="nav-item" onClick={() => handleNavClick("experience")}>
-          Experience
-        </button>
-        <button className="nav-item" onClick={() => handleNavClick("projects")}>
-          Projects
-        </button>
-        <button className="nav-item" onClick={() => handleNavClick("skills")}>
-          Skills
-        </button>
-        <Link
-          to="/certificates"
-          className={`nav-item ${location.pathname === "/certificates" ? "active" : ""}`}
-        >
-          Certificates
-        </Link>
-        <Link
-          to="/github"
-          className={`nav-item ${location.pathname === "/github" ? "active" : ""}`}
-        >
-          GitHub
-        </Link>
-        <button className="nav-item" onClick={() => handleNavClick("contact")}>
-          Contact
-        </button>
-      </div>
-
-      {/* Actions: Resume CTA & Mobile Toggle */}
-      <div className="nav-actions">
-        <a
-          href={process.env.PUBLIC_URL + portfolioData.personal.resume}
-          download="Suchit_Goled_Resume.pdf"
-          className="nav-resume-btn"
-          aria-label="Download Suchit Goled's Resume PDF"
-        >
-          <FaDownload aria-hidden="true" />
-          <span>Resume</span>
-        </a>
-
-        <button
-          className="menu-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? <FaTimes /> : <FaBars />}
-        </button>
-      </div>
-
-      {/* Mobile Drawer Overlay */}
-      {menuOpen && (
-        <div className="mobile-nav-overlay" onClick={() => setMenuOpen(false)}>
-          <div
-            className="mobile-nav-menu"
-            onClick={(e) => e.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile Navigation Menu"
+    <>
+      <header className={`netflix-navbar ${scrolled ? "scrolled" : ""}`}>
+        <div className="navbar-container">
+          {/* Logo brand */}
+          <Link
+            to="/"
+            className="navbar-brand-netflix"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <div>
-              <div className="mobile-nav-header">
-                <div className="nav-brand">
-                  <div className="brand-badge">SG</div>
-                  <div className="brand-text">Suchit<span>.dev</span></div>
-                </div>
-                <button
-                  className="modal-close-btn"
-                  onClick={() => setMenuOpen(false)}
-                  aria-label="Close menu"
-                >
-                  <FaTimes />
-                </button>
-              </div>
+            <span className="brand-netflix-lead">SUCHIT</span>
+            <span className="brand-netflix-accent">ORIGINALS</span>
+          </Link>
 
-              <div className="mobile-nav-links">
-                <button className="mobile-nav-item" onClick={() => handleNavClick("home")}>
-                  Home
-                </button>
-                <button className="mobile-nav-item" onClick={() => handleNavClick("about")}>
-                  About
-                </button>
-                <button className="mobile-nav-item" onClick={() => handleNavClick("experience")}>
-                  <FaBriefcase /> Experience & Education
-                </button>
-                <button className="mobile-nav-item" onClick={() => handleNavClick("projects")}>
-                  <FaCode /> Projects
-                </button>
-                <button className="mobile-nav-item" onClick={() => handleNavClick("skills")}>
-                  Skills
-                </button>
-                <Link
-                  to="/certificates"
-                  className="mobile-nav-item"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <FaAward /> Certificates
-                </Link>
-                <Link
-                  to="/github"
-                  className="mobile-nav-item"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  GitHub Analytics
-                </Link>
-                <button className="mobile-nav-item" onClick={() => handleNavClick("contact")}>
-                  Contact
-                </button>
-              </div>
+          {/* Desktop Navigation Links */}
+          <nav className="navbar-nav-desktop" aria-label="Main navigation">
+            <button
+              type="button"
+              className={`nav-link-btn ${location.pathname === "/" && !location.hash ? "active" : ""}`}
+              onClick={() => handleNavClick("home")}
+            >
+              Home
+            </button>
+            <button
+              type="button"
+              className="nav-link-btn"
+              onClick={() => handleNavClick("projects")}
+            >
+              Projects
+            </button>
+            <button
+              type="button"
+              className="nav-link-btn"
+              onClick={() => handleNavClick("journey")}
+            >
+              My Journey
+            </button>
+            <button
+              type="button"
+              className="nav-link-btn"
+              onClick={() => handleNavClick("skills")}
+            >
+              Skills
+            </button>
+            <button
+              type="button"
+              className="nav-link-btn"
+              onClick={() => handleNavClick("top-moments")}
+            >
+              Achievements
+            </button>
+            <button
+              type="button"
+              className="nav-link-btn"
+              onClick={() => handleNavClick("contact")}
+            >
+              Contact
+            </button>
+          </nav>
+
+          {/* Right Action Icons */}
+          <div className="navbar-actions-right">
+            {/* Search Trigger */}
+            <button
+              type="button"
+              className="nav-icon-action"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Open search catalogue"
+              title="Search catalogue"
+            >
+              <FaSearch />
+            </button>
+
+            {/* Notification Bell */}
+            <div className="notif-wrapper">
+              <button
+                type="button"
+                className={`nav-icon-action ${notifOpen ? "active" : ""}`}
+                onClick={() => setNotifOpen(!notifOpen)}
+                aria-label="Open notifications"
+                title="Notifications"
+              >
+                <FaBell />
+                <span className="notif-dot" aria-hidden="true" />
+              </button>
+              <NotificationDropdown
+                isOpen={notifOpen}
+                onClose={() => setNotifOpen(false)}
+              />
             </div>
 
-            <div className="mobile-nav-footer">
+            {/* Resume Button */}
+            <a
+              href={process.env.PUBLIC_URL + portfolioData.personal.resume}
+              download="Suchit_Goled_Resume.pdf"
+              className="nav-resume-pill"
+              title="Download Resume"
+              aria-label="Download Resume"
+            >
+              <FaDownload className="resume-icon" />
+              <span className="resume-text">Resume</span>
+            </a>
+
+            {/* Profile Avatar / Switcher Trigger */}
+            <button
+              type="button"
+              className="nav-profile-avatar-btn"
+              onClick={onOpenProfileModal}
+              title={`Active Profile: ${currentProfile?.title || "Recruiter"} (Click to switch)`}
+              aria-label={`Active Profile: ${currentProfile?.title || "Recruiter"}. Click to switch.`}
+            >
+              <img
+                src={process.env.PUBLIC_URL + portfolioData.personal.avatar}
+                alt="Suchit Goled Profile"
+                className="profile-avatar-img"
+              />
+              <span className={`profile-status-indicator theme-${currentProfile?.theme || "red"}`}>
+                {getProfileIcon()}
+              </span>
+            </button>
+
+            {/* Mobile Hamburger Toggle */}
+            <button
+              type="button"
+              className="mobile-hamburger-btn"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+            >
+              {menuOpen ? <FaTimes /> : <FaBars />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Nav Drawer */}
+        {menuOpen && (
+          <div className="mobile-menu-drawer" role="dialog" aria-modal="true">
+            <div className="mobile-menu-header">
+              <span className="brand-netflix-lead">SUCHIT</span>
+              <span className="brand-netflix-accent">ORIGINALS</span>
+              <button
+                type="button"
+                className="mobile-close-btn"
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                <FaTimes />
+              </button>
+            </div>
+
+            <div className="mobile-menu-links">
+              <button
+                type="button"
+                className="mobile-nav-link"
+                onClick={() => handleNavClick("home")}
+              >
+                Home
+              </button>
+              <button
+                type="button"
+                className="mobile-nav-link"
+                onClick={() => handleNavClick("projects")}
+              >
+                Projects
+              </button>
+              <button
+                type="button"
+                className="mobile-nav-link"
+                onClick={() => handleNavClick("journey")}
+              >
+                My Journey
+              </button>
+              <button
+                type="button"
+                className="mobile-nav-link"
+                onClick={() => handleNavClick("skills")}
+              >
+                Skills
+              </button>
+              <button
+                type="button"
+                className="mobile-nav-link"
+                onClick={() => handleNavClick("top-moments")}
+              >
+                Achievements
+              </button>
+              <button
+                type="button"
+                className="mobile-nav-link"
+                onClick={() => handleNavClick("full-story")}
+              >
+                The Full Story
+              </button>
+              <button
+                type="button"
+                className="mobile-nav-link"
+                onClick={() => handleNavClick("contact")}
+              >
+                Contact
+              </button>
+            </div>
+
+            <div className="mobile-menu-footer">
+              <button
+                type="button"
+                className="mobile-profile-switch-btn"
+                onClick={() => {
+                  setMenuOpen(false);
+                  onOpenProfileModal();
+                }}
+              >
+                <span>Switch Profile ({currentProfile?.title || "Recruiter"})</span>
+              </button>
+
               <a
                 href={process.env.PUBLIC_URL + portfolioData.personal.resume}
                 download="Suchit_Goled_Resume.pdf"
-                className="btn-primary"
-                style={{ width: "100%" }}
+                className="netflix-btn-red mobile-resume-btn"
               >
-                <FaDownload /> Download Resume
+                <FaDownload />
+                <span>Download Resume</span>
               </a>
             </div>
           </div>
-        </div>
-      )}
-    </nav>
+        )}
+      </header>
+
+      {/* Global Search Modal */}
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+    </>
   );
 }
-
-export default Navbar;
