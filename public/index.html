@@ -13,6 +13,38 @@
     <meta name="keywords" content="Suchit Goled, Portfolio, Full Stack Developer, React, Node.js, MERN, IoT, ESP32, Arduino, Acharya Institute of Technology, AI, Embedded Systems" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- Open Graph / WhatsApp / LinkedIn Link Previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://suchit-goled.vercel.app" />
+    <meta property="og:title" content="SUCHIT ORIGINALS — Suchit Goled | Full-Stack Developer & ECE Engineer" />
+    <meta property="og:description" content="Portfolio of Suchit Goled. Full Stack Developer, IoT & Embedded Systems Innovator, AI Researcher at Acharya Institute of Technology." />
+    <meta property="og:image" content="https://suchit-goled.vercel.app/Suchit.jpeg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SUCHIT ORIGINALS — Suchit Goled" />
+    <meta name="twitter:description" content="Electronics & Communication Engineer, Full Stack Developer & IoT Innovator." />
+    <meta name="twitter:image" content="https://suchit-goled.vercel.app/Suchit.jpeg" />
+
+    <!-- Google Analytics (GA4) Dynamic Integration -->
+    <script>
+      (function() {
+        var gaId = (typeof process !== 'undefined' && process.env && process.env.REACT_APP_GA_MEASUREMENT_ID) || null;
+        if (gaId) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', gaId);
+        }
+      })();
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />

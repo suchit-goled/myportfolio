@@ -1,9 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Home from "./Home";
 import Certificates from "./Certificates";
 import GitHubStats from "./GitHubStats";
 import ProjectDetail from "./ProjectDetail";
+import NotFound from "./NotFound";
 import "./App.css";
 
 function App() {
@@ -70,7 +71,7 @@ function App() {
           <Route path="/project/product-catalog" element={<ProjectDetail explicitId="product-catalog" />} />
           <Route path="/project/smart-inhaler" element={<ProjectDetail explicitId="smart-inhaler" />} />
           <Route path="/project/pharma-crm" element={<ProjectDetail explicitId="pharma-crm" />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -190,6 +190,7 @@ export default function ProjectDetail({ explicitId }) {
                     src={process.env.PUBLIC_URL + project.images[0].src}
                     alt={project.title}
                     className="hud-base-image"
+                    loading="lazy"
                   />
                 ) : (
                   <div className="hud-circuit-placeholder" />

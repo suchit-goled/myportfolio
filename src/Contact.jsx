@@ -6,7 +6,9 @@ import {
   FaPaperPlane,
   FaCopy,
   FaCheck,
-  FaMapMarkerAlt
+  FaMapMarkerAlt,
+  FaWhatsapp,
+  FaPhoneAlt
 } from "react-icons/fa";
 import { portfolioData } from "./data/portfolioData";
 
@@ -20,7 +22,12 @@ export default function Contact() {
     message: ""
   });
   const [copied, setCopied] = useState(false);
+  const [copiedMsg, setCopiedMsg] = useState(false);
   const [statusMessage, setStatusMessage] = useState(null);
+  const [emailTouched, setEmailTouched] = useState(false);
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const isEmailValid = emailRegex.test(formData.email.trim());
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personal.email);
@@ -28,9 +35,20 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2500);
   };
 
+  const handleCopyFormattedMessage = () => {
+    const fullText = `From: ${formData.name || "[Your Name]"} (${formData.email || "[Your Email]"})\nSubject: ${formData.subject || "Portfolio Inquiry"}\n\n${formData.message || "[Your Message]"}\n\nTo: ${personal.email} / WhatsApp: ${personal.phone}`;
+    navigator.clipboard.writeText(fullText);
+    setCopiedMsg(true);
+    setTimeout(() => setCopiedMsg(false), 2500);
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (statusMessage) setStatusMessage(null);
+  };
+
+  const handleBlurEmail = () => {
+    setEmailTouched(true);
   };
 
   const handleSubmit = (e) => {
@@ -44,11 +62,10 @@ export default function Contact() {
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
+    if (!isEmailValid) {
       setStatusMessage({
         type: "error",
-        text: "Please provide a valid email address."
+        text: "Please provide a valid email address with a domain (e.g. name@domain.com)."
       });
       return;
     }
@@ -65,7 +82,7 @@ export default function Contact() {
 
     setStatusMessage({
       type: "success",
-      text: "Opening your email client with your message pre-filled for Suchit Goled. You can also copy his direct email above!"
+      text: "Opening your email app with your message pre-filled. You can also message Suchit directly via WhatsApp or copy his email!"
     });
   };
 
@@ -91,6 +108,35 @@ export default function Contact() {
             </p>
 
             <div className="direct-cards-stack">
+              {/* WhatsApp Direct Card */}
+              <div className="direct-channel-card whatsapp-channel-card">
+                <div className="channel-icon-box whatsapp-box">
+                  <FaWhatsapp className="channel-icon whatsapp" />
+                </div>
+                <div className="channel-meta">
+                  <span className="channel-label">WhatsApp Direct</span>
+                  <a
+                    href={`https://wa.me/917676716597?text=${encodeURIComponent("Hi Suchit, I came across your portfolio and would like to discuss an opportunity / project.")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="channel-value text-whatsapp"
+                  >
+                    +91 7676716597
+                  </a>
+                </div>
+                <a
+                  href={`https://wa.me/917676716597?text=${encodeURIComponent("Hi Suchit, I came across your portfolio and would like to discuss an opportunity / project.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="channel-action-pill whatsapp-pill"
+                  title="Open WhatsApp chat"
+                  aria-label="Chat with Suchit on WhatsApp"
+                >
+                  <FaWhatsapp />
+                  <span>Chat</span>
+                </a>
+              </div>
+
               {/* Email Card with Copy button */}
               <div className="direct-channel-card">
                 <div className="channel-icon-box">
@@ -114,10 +160,23 @@ export default function Contact() {
                 </button>
               </div>
 
+              {/* Phone Card */}
+              <div className="direct-channel-card">
+                <div className="channel-icon-box">
+                  <FaPhoneAlt className="channel-icon blue" />
+                </div>
+                <div className="channel-meta">
+                  <span className="channel-label">Phone / Mobile</span>
+                  <a href={`tel:${personal.phone.replace(/\s+/g, '')}`} className="channel-value">
+                    {personal.phone}
+                  </a>
+                </div>
+              </div>
+
               {/* Location Card */}
               <div className="direct-channel-card">
                 <div className="channel-icon-box">
-                  <FaMapMarkerAlt className="channel-icon blue" />
+                  <FaMapMarkerAlt className="channel-icon yellow" />
                 </div>
                 <div className="channel-meta">
                   <span className="channel-label">Current Location</span>
@@ -188,19 +247,32 @@ export default function Contact() {
                 </div>
 
                 <div className="form-field-group">
-                  <label htmlFor="contact-email" className="field-label">
-                    Your Email <span className="req-star">*</span>
-                  </label>
+                  <div className="label-with-validation">
+                    <label htmlFor="contact-email" className="field-label">
+                      Your Email <span className="req-star">*</span>
+                    </label>
+                    {formData.email.length > 0 && (
+                      <span className={`email-verify-pill ${isEmailValid ? "valid" : "invalid"}`}>
+                        {isEmailValid ? <><FaCheck /> Verified format</> : "Enter valid email"}
+                      </span>
+                    )}
+                  </div>
                   <input
                     id="contact-email"
                     name="email"
                     type="email"
                     required
-                    className="form-text-input"
+                    className={`form-text-input ${emailTouched && !isEmailValid && formData.email.length > 0 ? "input-invalid" : ""}`}
                     placeholder="e.g. alex@company.com"
                     value={formData.email}
                     onChange={handleChange}
+                    onBlur={handleBlurEmail}
                   />
+                  {emailTouched && !isEmailValid && formData.email.length > 0 && (
+                    <span className="field-hint-error">
+                      Please enter a complete email address (e.g. name@domain.com)
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -244,10 +316,35 @@ export default function Contact() {
                 </div>
               )}
 
-              <button type="submit" className="netflix-btn-red form-submit-btn">
-                <FaPaperPlane className="btn-icon" />
-                <span>Send Message</span>
-              </button>
+              <div className="form-buttons-row">
+                <button type="submit" className="netflix-btn-red form-submit-btn">
+                  <FaPaperPlane className="btn-icon" />
+                  <span>Send via Email Client</span>
+                </button>
+                <button
+                  type="button"
+                  className="netflix-btn-secondary form-copy-btn"
+                  onClick={handleCopyFormattedMessage}
+                  title="Copy formatted message to clipboard"
+                >
+                  {copiedMsg ? <FaCheck className="text-green" /> : <FaCopy />}
+                  <span>{copiedMsg ? "Message Copied!" : "Copy Inquiry Text"}</span>
+                </button>
+                <a
+                  href={`https://wa.me/917676716597?text=${encodeURIComponent(
+                    formData.message
+                      ? `Hi Suchit, my name is ${formData.name || "a visitor"}. ${formData.message}`
+                      : "Hi Suchit, I came across your portfolio and would like to discuss an opportunity / project."
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="netflix-btn-secondary whatsapp-quick-btn"
+                  title="Direct WhatsApp Chat"
+                >
+                  <FaWhatsapp className="whatsapp-green-icon" />
+                  <span>Send via WhatsApp</span>
+                </a>
+              </div>
             </form>
           </div>
         </div>
